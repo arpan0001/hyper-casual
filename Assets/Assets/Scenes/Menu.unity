@@ -1287,11 +1287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CounterTxt: {fileID: 1616763914}
-  stickMan: {fileID: 1781335142328836986, guid: 679202b8d3247844a9e9d360c76e229c, type: 3}
+  stickMan: {fileID: 1481639839460698380, guid: 8b7b0ef29fdb5b44e83c0b3b4fe469f9, type: 3}
   DistanceFactor: 0.445
   Radius: 0.736
   enemy: {fileID: 0}
-  Attack: 0
+  Attack: 1
 --- !u!23 &583546623
 MeshRenderer:
   m_ObjectHideFlags: 0

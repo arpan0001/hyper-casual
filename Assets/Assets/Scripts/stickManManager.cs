@@ -5,18 +5,23 @@ using DG.Tweening;
 
 public class stickManManager : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem blood;
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("red") && other.transform.parent.childCount > 0)
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
+
+            Instantiate(blood, transform.position, Quaternion.identity);
         }
 
         switch (other.tag)
         {
             case "red":
-                if (other.transform.parent.childCount > 0)
+                if (other.transform.parent.childCount > 1)
                 {
                     Destroy(other.gameObject);
                     Destroy(gameObject);
@@ -24,7 +29,7 @@ public class stickManManager : MonoBehaviour
                 break;
 
             case "jump":
-                transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash);
+                transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
                 break;
         }
     }
