@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DG.Tweening; 
+using DG.Tweening;
 
 public class PlayerManager : MonoBehaviour
 {
     public Transform player;
     private int numberOfStickmans, numberOfEnemyStickmans;
-    [SerializeField] private TextMeshPro CounterTxt; 
+    [SerializeField] private TextMeshPro CounterTxt;
     [SerializeField] private GameObject stickMan;
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
@@ -39,12 +39,12 @@ public class PlayerManager : MonoBehaviour
     {
         if (attack)
         {
-            var enemyDirection = new Vector3(enemy.position.x, transform.position.y, enemy.position.z) - transform.position;   
-            
+            var enemyDirection = new Vector3(enemy.position.x, transform.position.y, enemy.position.z) - transform.position;
+
             for (int i = 1; i < transform.childCount; i++)
             {
-                transform.GetChild(i).rotation = 
-                    Quaternion.Slerp( transform.GetChild(i).rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3f );
+                transform.GetChild(i).rotation =
+                    Quaternion.Slerp(transform.GetChild(i).rotation, Quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3f);
             }
 
             if (enemy.GetChild(1).childCount > 1)
@@ -55,9 +55,9 @@ public class PlayerManager : MonoBehaviour
 
                     if (distance.magnitude < 1.5f)
                     {
-                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position, 
+                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position,
                             new Vector3(enemy.GetChild(1).GetChild(0).position.x, transform.GetChild(i).position.y,
-                                enemy.GetChild(1).GetChild(0).position.z), Time.deltaTime * 1f );
+                                enemy.GetChild(1).GetChild(0).position.z), Time.deltaTime * 1f);
                     }
                 }
             }
@@ -80,6 +80,9 @@ public class PlayerManager : MonoBehaviour
             {
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
+
+                // Stop the game
+                gameState = false;
             }
         }
         else
@@ -98,6 +101,13 @@ public class PlayerManager : MonoBehaviour
                     transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
                 }
             }
+        }
+
+        // Check if the number of player stickmans is 0
+        if (transform.childCount == 1)
+        {
+            // Stop the game
+            gameState = false;
         }
     }
 
@@ -160,7 +170,7 @@ public class PlayerManager : MonoBehaviour
     {
         for (int i = numberOfStickmans; i < number; i++)
         {
-            Instantiate(stickMan, transform.position, Quaternion.identity, transform); 
+            Instantiate(stickMan, transform.position, Quaternion.identity, transform);
         }
 
         numberOfStickmans = transform.childCount - 1;
@@ -176,8 +186,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.CompareTag("gate"))
         {
-            other.transform.parent.GetChild(0).GetComponent<BoxCollider>().enabled = false; 
-            other.transform.parent.GetChild(1).GetComponent<BoxCollider>().enabled = false; 
+            other.transform.parent.GetChild(0).GetComponent<BoxCollider>().enabled = false;
+            other.transform.parent.GetChild(1).GetComponent<BoxCollider>().enabled = false;
 
             var gateManager = other.GetComponent<GateManager>();
 
@@ -220,12 +230,20 @@ public class PlayerManager : MonoBehaviour
             enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
             CounterTxt.text = numberOfStickmans.ToString();
 
+            
+            if (numberOfStickmans == 0)
+            {
+                
+                gameState = false;
+                yield break;
+            }
+
             yield return null;
         }
 
-        if (numberOfEnemyStickmans == 0)
+        if (numberOfEnemyStickmans == 1)
         {
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 1; i < transform.childCount; i++)
             {
                 transform.GetChild(i).rotation = Quaternion.identity;
             }

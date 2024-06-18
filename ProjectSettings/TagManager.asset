@@ -9,6 +9,7 @@ TagManager:
   - blue
   - red
   - jump
+  - obstacle
   layers:
   - Default
   - TransparentFX
