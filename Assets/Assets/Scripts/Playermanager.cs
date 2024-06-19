@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
-    public bool moveByTouch, gameState;
+    public bool moveByTouch, gameState, attackToTheBoss ;
     private Vector3 mouseStartPos, playerStartPos;
     public float playerSpeed, roadSpeed;
     private Camera camera;

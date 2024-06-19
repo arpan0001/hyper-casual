@@ -10,6 +10,8 @@ TagManager:
   - red
   - jump
   - obstacle
+  - Trap
+  - boss
   layers:
   - Default
   - TransparentFX

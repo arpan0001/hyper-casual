@@ -31,6 +31,8 @@ public class stickManManager : MonoBehaviour
             case "jump":
                 transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
                 break;
+
+                other.gameObject.GetComponent<memeberManager>().member = true;  
         }
 
         if (other.GetComponent<Collider>().CompareTag("obstacle"))
