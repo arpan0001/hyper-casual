@@ -12,6 +12,7 @@ TagManager:
   - obstacle
   - Trap
   - boss
+  - hit
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Hide
+  - stickman
+  - boss
   - 
   - 
   - 
