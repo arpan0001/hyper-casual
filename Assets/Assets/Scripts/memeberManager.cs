@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class memeberManager : MonoBehaviour
-{ 
+{
     public Animator character_animator;
     public GameObject Particle_Death;
     private Transform Boss;
@@ -19,13 +19,20 @@ public class memeberManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
 
-        Boss = GameObject.FindWithTag("boss").transform;
+        GameObject bossObj = GameObject.FindWithTag("boss");
+        if (bossObj != null)
+        {
+            Boss = bossObj.transform;
+            bossManager.OnBossDeath += HandleBossDeath; 
+        }
 
         Health = 5;
     }
 
     void Update()
     {
+        if (Boss == null) return;
+
         var bossDistance = Boss.position - transform.position;
 
         if (!fight)
@@ -38,10 +45,10 @@ public class memeberManager : MonoBehaviour
 
             if (PlayerManager.PlayerManagerInstance.attackToTheBoss && member)
             {
-                Vector3 targetPosition = CalculateTargetPosition();
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, Boss.position, moveSpeed * Time.deltaTime);
 
                 var stickManRotation = new Vector3(Boss.position.x, transform.position.y, Boss.position.z) - transform.position;
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(stickManRotation, Vector3.up), 10f * Time.deltaTime);
 
                 character_animator.SetFloat("run", 1f);
@@ -55,6 +62,7 @@ public class memeberManager : MonoBehaviour
             fight = true;
 
             var stickManRotation = new Vector3(Boss.position.x, transform.position.y, Boss.position.z) - transform.position;
+
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(stickManRotation, Vector3.up), 10f * Time.deltaTime);
 
             character_animator.SetBool("fight", true);
@@ -69,15 +77,17 @@ public class memeberManager : MonoBehaviour
         }
     }
 
-    private Vector3 CalculateTargetPosition()
+    private void OnDestroy()
     {
-        // Determine a position around the boss based on the member's index and total members
-        int totalMembers = PlayerManager.PlayerManagerInstance.player.childCount - 1; // Assuming player is a Transform containing all stickmen
-        int memberIndex = transform.GetSiblingIndex(); // Assuming each member is a sibling in the hierarchy
+        if (Boss != null)
+        {
+            bossManager.OnBossDeath -= HandleBossDeath; 
+        }
+    }
 
-        float angle = 360f / totalMembers * memberIndex;
-        Vector3 offset = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad)) * MinDistanceOfEnemy;
-        return Boss.position + offset;
+    private void HandleBossDeath()
+    {
+        character_animator.SetFloat("attackmode", 4f);
     }
 
     public void ChangeTheAttackMode()

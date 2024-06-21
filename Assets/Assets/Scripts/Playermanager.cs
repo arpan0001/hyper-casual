@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
-    public bool moveByTouch, gameState, attackToTheBoss ;
+    public bool moveByTouch, gameState, attackToTheBoss;
     private Vector3 mouseStartPos, playerStartPos;
     public float playerSpeed, roadSpeed;
     private Camera camera;
@@ -33,10 +33,16 @@ public class PlayerManager : MonoBehaviour
         camera = Camera.main;
 
         PlayerManagerInstance = this;
+        
     }
 
     void Update()
     {
+        if (!gameState)
+        {
+            return;
+        }
+
         if (attack)
         {
             var enemyDirection = new Vector3(enemy.position.x, transform.position.y, enemy.position.z) - transform.position;
@@ -81,7 +87,6 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
 
-                // Stop the game
                 gameState = false;
             }
         }
@@ -89,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         {
             MoveThePlayer();
         }
+        
 
         if (gameState)
         {
@@ -101,14 +107,20 @@ public class PlayerManager : MonoBehaviour
                     transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
                 }
             }
+
+            
         }
 
-        // Check if the number of player stickmans is 0
+       
+
+       
         if (transform.childCount == 1)
         {
-            // Stop the game
+            
             gameState = false;
         }
+
+       
     }
 
     void MoveThePlayer()
@@ -230,10 +242,10 @@ public class PlayerManager : MonoBehaviour
             enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
             CounterTxt.text = numberOfStickmans.ToString();
 
-            
+
             if (numberOfStickmans == 0)
             {
-                
+
                 gameState = false;
                 yield break;
             }
@@ -250,5 +262,10 @@ public class PlayerManager : MonoBehaviour
 
             enemy.GetComponent<EnemyManager>().StopAttacking();
         }
+    }
+
+    public void StartGame()
+    {
+        gameState = true;
     }
 }

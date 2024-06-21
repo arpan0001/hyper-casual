@@ -29,8 +29,8 @@ public class stickManManager : MonoBehaviour
                 break;
 
             case "jump":
-                transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
-                break;
+             transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
+             break;
 
                 other.gameObject.GetComponent<memeberManager>().member = true;  
         }
