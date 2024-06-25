@@ -1,3 +1,4 @@
+
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < Random.Range(20, 120); i++)
+        for (int i = 0; i < Random.Range(30,30 ); i++)
         {
             Instantiate(stickMan, transform.position, new Quaternion(0f, 180f, 0f, 1f), transform);
         }

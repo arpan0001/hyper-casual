@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -33,7 +32,6 @@ public class PlayerManager : MonoBehaviour
         camera = Camera.main;
 
         PlayerManagerInstance = this;
-        
     }
 
     void Update()
@@ -86,7 +84,6 @@ public class PlayerManager : MonoBehaviour
             {
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
-
                 gameState = false;
             }
         }
@@ -94,7 +91,6 @@ public class PlayerManager : MonoBehaviour
         {
             MoveThePlayer();
         }
-        
 
         if (gameState)
         {
@@ -107,20 +103,17 @@ public class PlayerManager : MonoBehaviour
                     transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
                 }
             }
-
-            
         }
 
-       
-
-       
-        if (transform.childCount == 1)
+        if (transform.childCount == 1) // If there's only the player object left
         {
-            
+            if (enemy != null && enemy.transform.GetChild(1).childCount > 0)
+            {
+                enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
+            }
             gameState = false;
+            
         }
-
-       
     }
 
     void MoveThePlayer()
@@ -229,40 +222,44 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
+   IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
+ {
+    numberOfEnemyStickmans = enemy.transform.GetChild(1).childCount - 1;
+    numberOfStickmans = transform.childCount - 1;
+
+    while (numberOfEnemyStickmans > 0 && numberOfStickmans > 0)
     {
-        numberOfEnemyStickmans = enemy.transform.GetChild(1).childCount - 1;
-        numberOfStickmans = transform.childCount - 1;
+        numberOfEnemyStickmans--;
+        numberOfStickmans--;
 
-        while (numberOfEnemyStickmans > 0 && numberOfStickmans > 0)
+        enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
+        CounterTxt.text = numberOfStickmans.ToString();
+
+        
+        if (numberOfStickmans == 0)
         {
-            numberOfEnemyStickmans--;
-            numberOfStickmans--;
+            enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
+            gameState = false;
 
-            enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
-            CounterTxt.text = numberOfStickmans.ToString();
-
-
-            if (numberOfStickmans == 0)
-            {
-
-                gameState = false;
-                yield break;
-            }
-
-            yield return null;
+            
+            Destroy(gameObject);
+            yield break;
         }
 
-        if (numberOfEnemyStickmans == 1)
-        {
-            for (int i = 1; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).rotation = Quaternion.identity;
-            }
-
-            enemy.GetComponent<EnemyManager>().StopAttacking();
-        }
+        yield return null;
     }
+
+    if (numberOfEnemyStickmans == 0)
+    {
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).rotation = Quaternion.identity;
+        }
+
+        enemy.GetComponent<EnemyManager>().StopAttacking();
+    }
+ }
+
 
     public void StartGame()
     {
