@@ -105,7 +105,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if (transform.childCount == 1) // If there's only the player object left
+        if (transform.childCount == 1) 
         {
             if (enemy != null && enemy.transform.GetChild(1).childCount > 0)
             {
