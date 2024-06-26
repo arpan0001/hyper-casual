@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481639839460698380}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.030646, y: -0.928, z: 0.025866}
   m_LocalScale: {x: 5.5843596, y: 5.584358, z: 5.584358}
   m_ConstrainProportionsScale: 0
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3390b0168625341892ac46d6a24cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blood: {fileID: 117395733313359720, guid: 0b685d3a78818794eab2ba2c872b1e2b, type: 3}
+  ch_blood: {fileID: 6737994341172452977, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
 --- !u!114 &827934205646278131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,12 +543,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_animator: {fileID: 0}
-  Particle_Death: {fileID: 0}
+  Particle_Death: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
   Health: 5
   MinDistanceOfEnemy: 0.5
   MaxDistanceOfEnemy: 3
   moveSpeed: 1
-  circleRadius: 4
   fight: 0
   member: 1
 --- !u!1 &1492091223437675890

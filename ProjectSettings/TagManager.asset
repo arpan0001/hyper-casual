@@ -13,6 +13,7 @@ TagManager:
   - Trap
   - boss
   - hit
+  - damage
   layers:
   - Default
   - TransparentFX

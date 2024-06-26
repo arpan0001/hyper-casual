@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class stickManManager : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem blood;
+    [SerializeField] private ParticleSystem ch_blood;
 
     
     private void OnTriggerEnter(Collider other)
@@ -15,7 +15,7 @@ public class stickManManager : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
 
-            Instantiate(blood, transform.position, Quaternion.identity);
+            Instantiate(ch_blood, transform.position, Quaternion.identity);
         }
 
         switch (other.tag)
@@ -39,7 +39,16 @@ public class stickManManager : MonoBehaviour
         {
             Destroy(gameObject);
 
-            Instantiate(blood, transform.position, Quaternion.identity);
+            Instantiate(ch_blood, transform.position, Quaternion.identity);
+            
+            
+        }
+
+        if (other.GetComponent<Collider>().CompareTag("damage"))
+        {
+            Destroy(gameObject);
+
+            Instantiate(ch_blood, transform.position, Quaternion.identity);
             
             
         }

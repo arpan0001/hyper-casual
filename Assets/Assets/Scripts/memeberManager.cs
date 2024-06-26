@@ -5,7 +5,7 @@ using UnityEngine;
 public class memeberManager : MonoBehaviour
 {
     public Animator character_animator;
-    public GameObject Particle_Death;
+    public GameObject ch_blood;
     private Transform Boss;
     public int Health;
     public float MinDistanceOfEnemy, MaxDistanceOfEnemy, moveSpeed;
@@ -26,7 +26,7 @@ public class memeberManager : MonoBehaviour
             bossManager.OnBossDeath += HandleBossDeath; 
         }
 
-        Health = 5;
+        Health = 2;
     }
 
     void Update()
@@ -94,4 +94,26 @@ public class memeberManager : MonoBehaviour
     {
         character_animator.SetFloat("attackmode", Random.Range(0, 3));
     }
+
+    private void OnCollisionEnter(Collision other)
+ {
+    if (other.collider.CompareTag("damage"))
+    {
+        Health--;
+
+        if (Health <= 0)
+        {
+            Instantiate(ch_blood, transform.position, Quaternion.identity);
+
+            gameObject.SetActive(false);
+            transform.parent = null;
+        }
+    }
+    else if (other.collider.CompareTag("blue"))
+    {
+        Destroy(other.gameObject);
+    }
+ }
+
+
 }

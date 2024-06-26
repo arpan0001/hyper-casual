@@ -24,7 +24,7 @@ public class bossManager : MonoBehaviour
         BossManagerCls = this;
         BossAnimator = GetComponent<Animator>();
         BossIsAlive = true;
-        HealthBar.value = HealthBar.maxValue = Health = 200;
+        HealthBar.value = HealthBar.maxValue = Health = 2000;
         Health_bar_amount.text = Health.ToString();
     }
 
