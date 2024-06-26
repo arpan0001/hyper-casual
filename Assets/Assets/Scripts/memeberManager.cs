@@ -26,7 +26,7 @@ public class memeberManager : MonoBehaviour
             bossManager.OnBossDeath += HandleBossDeath; 
         }
 
-        Health = 2;
+        Health = 50;
     }
 
     void Update()

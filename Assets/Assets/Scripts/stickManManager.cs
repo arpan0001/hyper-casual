@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening; 
+using DG.Tweening;
 
 public class stickManManager : MonoBehaviour
 {
     [SerializeField] private ParticleSystem ch_blood;
 
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("red") && other.transform.parent.childCount > 0)
@@ -29,28 +28,20 @@ public class stickManManager : MonoBehaviour
                 break;
 
             case "jump":
-             transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
-             break;
+                transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
+                break;
 
-                other.gameObject.GetComponent<memeberManager>().member = true;  
+            case "obstacle":
+            case "damage":
+                Destroy(gameObject);
+                Instantiate(ch_blood, transform.position, Quaternion.identity);
+                break;
         }
 
-        if (other.GetComponent<Collider>().CompareTag("obstacle"))
+        // Update counter if destroyed by obstacle or damage
+        if (other.CompareTag("obstacle") || other.CompareTag("damage"))
         {
-            Destroy(gameObject);
-
-            Instantiate(ch_blood, transform.position, Quaternion.identity);
-            
-            
-        }
-
-        if (other.GetComponent<Collider>().CompareTag("damage"))
-        {
-            Destroy(gameObject);
-
-            Instantiate(ch_blood, transform.position, Quaternion.identity);
-            
-            
+            PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
         }
     }
 }

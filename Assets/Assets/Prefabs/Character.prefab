@@ -543,10 +543,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_animator: {fileID: 0}
-  Particle_Death: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
-  Health: 5
+  ch_blood: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
+  Health: 50
   MinDistanceOfEnemy: 0.5
-  MaxDistanceOfEnemy: 3
+  MaxDistanceOfEnemy: 1
   moveSpeed: 1
   fight: 0
   member: 1

@@ -1359,6 +1359,7 @@ GameObject:
   - component: {fileID: 2207494031385261762}
   - component: {fileID: 5555433862838953190}
   - component: {fileID: -5587207801678456615}
+  - component: {fileID: 6914540701659202597}
   m_Layer: 8
   m_Name: Boss
   m_TagString: boss
@@ -1450,6 +1451,19 @@ MonoBehaviour:
   Particle_Death: {fileID: 4759254702483776918, guid: 4a7480f784f543949b4bdf21cec0eeb6, type: 3}
   maxDistance: 4
   minDistance: 3
+--- !u!114 &6914540701659202597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3913030844945355332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c1a446b3f13454caab8d04e58e9444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossAnimator: {fileID: 5555433862838953190}
 --- !u!1 &4041801549963042514
 GameObject:
   m_ObjectHideFlags: 0

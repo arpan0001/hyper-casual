@@ -14,7 +14,7 @@ public class bossManager : MonoBehaviour
     public TextMeshProUGUI Health_bar_amount;
     public int Health;
     public GameObject Particle_Death;
-    public float maxDistance = 10f; // Adjust as needed
+    public float maxDistance = 10f; 
     public float minDistance = 3f; 
     public delegate void BossDeathDelegate();
     public static event BossDeathDelegate OnBossDeath;
@@ -24,7 +24,7 @@ public class bossManager : MonoBehaviour
         BossManagerCls = this;
         BossAnimator = GetComponent<Animator>();
         BossIsAlive = true;
-        HealthBar.value = HealthBar.maxValue = Health = 2000;
+        HealthBar.value = HealthBar.maxValue = Health = 200;
         Health_bar_amount.text = Health.ToString();
     }
 
@@ -67,10 +67,12 @@ public class bossManager : MonoBehaviour
             OnBossDeath?.Invoke();
             gameObject.SetActive(false);
             BossIsAlive = false;
+            Instantiate(Particle_Death, transform.position, Quaternion.identity);
         }
     }
 
-    public void ChangeTheBossAttackMode()
+
+   public void ChangeTheBossAttackMode()
     {
         Debug.Log("Changing boss attack mode...");
         BossAnimator.SetFloat("attackmode", Random.Range(2, 4));
