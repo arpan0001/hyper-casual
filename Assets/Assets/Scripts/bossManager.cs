@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Add this line
 
 public class bossManager : MonoBehaviour
 {
@@ -68,9 +69,9 @@ public class bossManager : MonoBehaviour
             gameObject.SetActive(false);
             BossIsAlive = false;
             Instantiate(Particle_Death, transform.position, Quaternion.identity);
+            SceneManager.LoadScene(1); // Add this line to load Scene 1 (Reward System)
         }
     }
-
 
    public void ChangeTheBossAttackMode()
     {

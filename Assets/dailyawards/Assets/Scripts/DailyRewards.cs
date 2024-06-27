@@ -5,10 +5,11 @@ using System.Collections;
 
 namespace DailyRewardSystem {
     public enum RewardType {
-        Coins
+        Coins,
     }
 
-    [Serializable] public struct Reward {
+    [Serializable]
+    public struct Reward {
         public RewardType Type;
         public int Amount;
     }
@@ -43,8 +44,9 @@ namespace DailyRewardSystem {
 
         [Space]
         [Header("Timing")]
-        [SerializeField] double nextRewardDelay = 23f;
-        [SerializeField] float checkForRewardDelay = 5f;
+        [SerializeField] int nextRewardDelayMinutes = 0;
+        [SerializeField] int nextRewardDelaySeconds = 10;
+        [SerializeField] float checkForRewardDelay = 2f;
 
         private int nextRewardIndex;
         private bool isRewardReady = false;
@@ -70,8 +72,9 @@ namespace DailyRewardSystem {
             claimButton.onClick.RemoveAllListeners();
             claimButton.onClick.AddListener(OnClaimButtonClick);
 
-            if (string.IsNullOrEmpty(PlayerPrefs.GetString("Reward_Claim_Datetime")))
+            if (string.IsNullOrEmpty(PlayerPrefs.GetString("Reward_Claim_Datetime"))) {
                 PlayerPrefs.SetString("Reward_Claim_Datetime", DateTime.Now.ToString());
+            }
         }
 
         IEnumerator CheckForRewards() {
@@ -80,9 +83,13 @@ namespace DailyRewardSystem {
                     DateTime currentDatetime = DateTime.Now;
                     DateTime rewardClaimDatetime = DateTime.Parse(PlayerPrefs.GetString("Reward_Claim_Datetime", currentDatetime.ToString()));
 
-                    double elapsedHours = (currentDatetime - rewardClaimDatetime).TotalHours;
+                    TimeSpan elapsed = currentDatetime - rewardClaimDatetime;
 
-                    if (elapsedHours >= nextRewardDelay)
+                    double elapsedSeconds = elapsed.TotalSeconds;
+
+                    double nextRewardDelayInSeconds = (nextRewardDelayMinutes * 60) + nextRewardDelaySeconds;
+
+                    if (elapsedSeconds >= nextRewardDelayInSeconds)
                         ActivateReward();
                     else
                         DeactivateReward();

@@ -9,6 +9,7 @@ public class menuManager : MonoBehaviour
     [SerializeField] private Text TapToPlay; 
     [SerializeField] private GameObject Hand_Ico;
     [SerializeField] private GameObject Tap_line;
+    [SerializeField] private GameObject DailyRewardButton;
     [SerializeField] private RectTransform tap_handRectTransform;
 
     [SerializeField] private float tapToPlaySpeed = 2f;  
@@ -45,6 +46,7 @@ public class menuManager : MonoBehaviour
         TapToPlay.gameObject.SetActive(false);
         Hand_Ico.SetActive(false);
         Tap_line.SetActive(false);
+        DailyRewardButton.SetActive(false);
 
         PlayerManager.PlayerManagerInstance.StartGame();
 
