@@ -427,7 +427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1206713834047661649
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481639839460698380}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.030646, y: -0.928, z: 0.025866}
   m_LocalScale: {x: 5.5843596, y: 5.584358, z: 5.584358}
   m_ConstrainProportionsScale: 0
@@ -545,9 +545,9 @@ MonoBehaviour:
   character_animator: {fileID: 0}
   ch_blood: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
   Health: 50
-  MinDistanceOfEnemy: 0.5
+  MinDistanceOfEnemy: 1
   MaxDistanceOfEnemy: 1
-  moveSpeed: 1
+  moveSpeed: 3
   fight: 0
   member: 1
 --- !u!1 &1492091223437675890

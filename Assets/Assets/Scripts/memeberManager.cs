@@ -87,12 +87,12 @@ public class memeberManager : MonoBehaviour
 
     private void HandleBossDeath()
     {
-        character_animator.SetFloat("attackmode", 4f);
+        character_animator.SetFloat("attackmode", 2f);
     }
 
     public void ChangeTheAttackMode()
     {
-        character_animator.SetFloat("attackmode", Random.Range(0, 3));
+        character_animator.SetFloat("attackmode", Random.Range(0, 2));
     }
 
     private void OnCollisionEnter(Collision other)
