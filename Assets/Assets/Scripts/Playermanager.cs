@@ -9,7 +9,11 @@ public class PlayerManager : MonoBehaviour
     private int numberOfStickmans, numberOfEnemyStickmans;
     [SerializeField] private TextMeshPro CounterTxt;
     [SerializeField] private GameObject stickMan;
-    [SerializeField] private GameObject weaponToActivate;
+    [SerializeField] public GameObject weapon2;
+    [SerializeField] public GameObject weapon3;
+
+    public bool w2Activated = false;
+    public bool w3Activated = false;
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
@@ -227,25 +231,29 @@ public class PlayerManager : MonoBehaviour
         if (other.CompareTag("weapongate"))
         {
             
-            if (weaponToActivate != null)
+            if (weapon2 != null)
             {
-                weaponToActivate.SetActive(true);
+                weapon2.SetActive(true);
+                w2Activated=true;
             }
         }
 
-        
-
-        
-    }
-
-    void ActivateWeapon()
-    {
-        
-        if (weaponToActivate != null)
+        if (other.CompareTag("gun"))
         {
-            weaponToActivate.SetActive(true);
+            
+            if (weapon2 != null)
+            {
+                weapon3.SetActive(true);
+                w2Activated=false;
+
+                w3Activated=true;
+            }
         }
+        
+
+        
     }
+
 
 
     IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
@@ -259,7 +267,7 @@ public class PlayerManager : MonoBehaviour
             numberOfStickmans--;
 
             enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
-            CounterTxt.text = numberOfStickmans.ToString(); // Update counter text here
+            CounterTxt.text = numberOfStickmans.ToString(); 
 
             if (numberOfStickmans == 0)
             {

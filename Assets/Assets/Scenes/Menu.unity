@@ -2492,7 +2492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &380179892
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3620,6 +3620,7 @@ MonoBehaviour:
   Tap_line: {fileID: 2117141443}
   DailyRewardButton: {fileID: 1128640940}
   tap_handRectTransform: {fileID: 403670432}
+  shop: {fileID: 923784328}
   tapToPlaySpeed: 1
   handIcoSpeed: 1
 --- !u!1 &645147684
@@ -12807,8 +12808,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4325971301093558392, guid: 4abb4c05bce796a45a1cc1e708bf3fcd, type: 3}
-      propertyPath: m_TagString
-      value: weapon
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

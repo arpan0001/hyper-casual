@@ -11,6 +11,8 @@ public class menuManager : MonoBehaviour
     [SerializeField] private GameObject Tap_line;
     [SerializeField] private GameObject DailyRewardButton;
     [SerializeField] private RectTransform tap_handRectTransform;
+    [SerializeField] private GameObject shop;
+    
 
     [SerializeField] private float tapToPlaySpeed = 2f;  
     [SerializeField] private float handIcoSpeed = 1f;    
@@ -47,6 +49,7 @@ public class menuManager : MonoBehaviour
         Hand_Ico.SetActive(false);
         Tap_line.SetActive(false);
         DailyRewardButton.SetActive(false);
+        shop.SetActive(false);
 
         PlayerManager.PlayerManagerInstance.StartGame();
 
