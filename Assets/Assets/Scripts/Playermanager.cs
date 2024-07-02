@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     private int numberOfStickmans, numberOfEnemyStickmans;
     [SerializeField] private TextMeshPro CounterTxt;
     [SerializeField] private GameObject stickMan;
+    [SerializeField] private GameObject weaponToActivate;
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
@@ -183,7 +184,7 @@ public class PlayerManager : MonoBehaviour
         numberOfStickmans = transform.childCount - 1;
         if (CounterTxt != null)
         {
-            CounterTxt.text = numberOfStickmans.ToString(); // Update counter text here
+            CounterTxt.text = numberOfStickmans.ToString(); 
         }
 
         FormatStickMan();
@@ -222,7 +223,30 @@ public class PlayerManager : MonoBehaviour
 
             StartCoroutine(UpdateTheEnemyAndPlayerStickMansNumbers());
         }
+
+        if (other.CompareTag("weapongate"))
+        {
+            
+            if (weaponToActivate != null)
+            {
+                weaponToActivate.SetActive(true);
+            }
+        }
+
+        
+
+        
     }
+
+    void ActivateWeapon()
+    {
+        
+        if (weaponToActivate != null)
+        {
+            weaponToActivate.SetActive(true);
+        }
+    }
+
 
     IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
     {

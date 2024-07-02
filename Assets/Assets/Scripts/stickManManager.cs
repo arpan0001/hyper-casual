@@ -38,7 +38,7 @@ public class stickManManager : MonoBehaviour
                 break;
         }
 
-        // Update counter if destroyed by obstacle or damage
+        
         if (other.CompareTag("obstacle") || other.CompareTag("damage"))
         {
             PlayerManager.PlayerManagerInstance.UpdateStickmanCount();

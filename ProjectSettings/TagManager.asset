@@ -14,6 +14,8 @@ TagManager:
   - boss
   - hit
   - damage
+  - weapon
+  - weapongate
   layers:
   - Default
   - TransparentFX

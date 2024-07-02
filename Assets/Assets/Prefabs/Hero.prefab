@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3390b0168625341892ac46d6a24cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blood: {fileID: 117395733313359720, guid: 0b685d3a78818794eab2ba2c872b1e2b, type: 3}
+  ch_blood: {fileID: 0}
 --- !u!114 &1215634701765980687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_animator: {fileID: 0}
-  Particle_Death: {fileID: 0}
+  ch_blood: {fileID: 0}
   Health: 5
   MinDistanceOfEnemy: 0.3
   MaxDistanceOfEnemy: 3

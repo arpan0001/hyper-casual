@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/Assets/Scenes/Menu.unity
     guid: 96d875b2ea73a054fb5072a44cfabb73
   - enabled: 1
-    path: Assets/reward/Scenes/Reward System.unity
+    path: Assets/LevelReward/Scenes/Reward System.unity
     guid: c59339574decd004e83bd02fcdd7d6a6
+  - enabled: 1
+    path: Assets/Shop/Assets/shop.unity
+    guid: 7062e0862b02e13409ca235598ceda46
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
