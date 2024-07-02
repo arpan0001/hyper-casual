@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CloneWeaponActive : MonoBehaviour
 {
+    public Animator character_animator;
+
     public GameObject w1;
     public GameObject w2;
     public GameObject w3;
@@ -12,6 +14,11 @@ public class CloneWeaponActive : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        character_animator = GetComponent<Animator>();
+
+        character_animator.SetBool("GunRun", false);
+
+
         w1.SetActive(true);
         w2.SetActive(false);
 
@@ -30,14 +37,26 @@ public class CloneWeaponActive : MonoBehaviour
     
     void Update()
     {
+        if(manager.gameState){
+        character_animator.SetBool("run", true);
+
+
+        }
         if (manager != null && manager.w2Activated)
         {
+            character_animator.SetBool("run", true);
+
+
             Debug.Log("Weapon 2 Activated");
             w2.SetActive(true);
             w1.SetActive(false);
         }
         if (manager != null && manager.w3Activated)
         {
+            character_animator.SetBool("run", false);
+
+            character_animator.SetBool("GunRun", true);
+
             Debug.Log("Weapon 3 Activated");
             w3.SetActive(true);
             w1.SetActive(false);

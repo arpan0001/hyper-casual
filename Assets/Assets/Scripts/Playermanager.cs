@@ -102,14 +102,15 @@ public class PlayerManager : MonoBehaviour
         if (gameState)
         {
             road.Translate(road.forward * Time.deltaTime * roadSpeed);
+            
 
-            for (int i = 1; i < transform.childCount; i++)
+            /*for (int i = 1; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).GetComponent<Animator>() != null)
                 {
                     transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
                 }
-            }
+            }*/
         }
 
         if (transform.childCount == 1) 
@@ -247,6 +248,7 @@ public class PlayerManager : MonoBehaviour
                 w2Activated=false;
 
                 w3Activated=true;
+                
             }
         }
         
