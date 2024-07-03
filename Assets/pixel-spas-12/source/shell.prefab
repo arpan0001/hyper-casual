@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5213421115224352802}
   - component: {fileID: 937854352440786047}
   - component: {fileID: 5411682579388738555}
-  - component: {fileID: 2837179470987040162}
   - component: {fileID: 9111906564686381048}
+  - component: {fileID: 7807424087534726453}
+  - component: {fileID: 7229668402343043339}
   m_Layer: 0
   m_Name: shell
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.4713454, y: 2.9527564, z: 3.317021}
+  m_LocalScale: {x: 13.647579, y: 11.608749, z: 13.0408535}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,7 +116,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!96 &5411682579388738555
 TrailRenderer:
   serializedVersion: 3
@@ -139,7 +140,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 3e860bee5eddb1c42a8f5be4a7875f07, type: 3}
+  - {fileID: -3846018093981099296, guid: f340032874606c7458387f753b8daaed, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,8 +170,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.040799323
-        value: 0.01032262
+        time: 0.031632606
+        value: 0.015480086
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -231,21 +232,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &2837179470987040162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6683759763257034730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac1dd75e066c4bd4892949782b89e767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MyRb: {fileID: 937854352440786047}
-  speed: 1000
-  Explosion: {fileID: 3950128889700759116, guid: 1999ce893c3f5364cb52be5c7c0d9a72, type: 3}
 --- !u!65 &9111906564686381048
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -267,3 +253,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0012500023, y: 0.005, z: 0.0012500013}
   m_Center: {x: 1.4551914e-10, y: 4.3368087e-18, z: 5.8207655e-10}
+--- !u!114 &7807424087534726453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6683759763257034730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9835e2ac8169fb042a2083060dc7bad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7229668402343043339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6683759763257034730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1dd75e066c4bd4892949782b89e767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyRb: {fileID: 937854352440786047}
+  speed: 200
+  Explosion: {fileID: 3950128889700759116, guid: 1999ce893c3f5364cb52be5c7c0d9a72, type: 3}
+  destroyTime: 10

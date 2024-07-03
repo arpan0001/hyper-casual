@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour
 {
     public GameObject BulletPrefab;
     public float FireRate;
-    float timer;
+    private float timer;
     public GameObject SpawnPos;
 
     void Start()
@@ -28,10 +28,6 @@ public class Shoot : MonoBehaviour
                 go.SetActive(true);
                 
             }
-
-
-
-
         }
     
 

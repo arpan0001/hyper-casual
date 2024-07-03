@@ -7,31 +7,21 @@ public class Bullet : MonoBehaviour
     public Rigidbody MyRb;
     public float speed;
     public GameObject Explosion;
+    public float destroyTime = 10f;
 
-    // Start is called before the first frame update
+    void Start()
+    {
+        MyRb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+        Destroy(this.gameObject, destroyTime);
+    }
 
-   void Start()
-   {
-     MyRb. AddForce(transform. forward * speed);
-     Destroy(this.gameObject, 4);
-   }
- 
- void OnTriggerEnter(Collider col)
- {
-    
-   GameObject go = Instantiate(Explosion, transform.position, transform.rotation);
-   go.SetActive(true);
-   Destroy(go, 1);
-   Destroy(this.gameObject);
+    void OnTriggerEnter(Collider col)
+    {
+        GameObject go = Instantiate(Explosion, transform.position, transform.rotation);
+        go.SetActive(true);
+        Destroy(go, destroyTime);
+        Destroy(this.gameObject);
 
-   //col .GetComponent<Script>() .doDamage ()
-
-   // Update is called once per frame
- }
-
-  void Update()
-  {
-
-   }
-
+        // col.GetComponent<Script>().doDamage();
+    }
 }
