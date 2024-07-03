@@ -17,6 +17,7 @@ TagManager:
   - weapon
   - weapongate
   - gun
+  - bullet
   layers:
   - Default
   - TransparentFX

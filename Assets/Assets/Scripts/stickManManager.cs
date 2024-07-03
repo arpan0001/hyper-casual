@@ -39,9 +39,10 @@ public class stickManManager : MonoBehaviour
         }
 
         
-        if (other.CompareTag("obstacle") || other.CompareTag("damage"))
-        {
-            PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
-        }
+       // if (other.CompareTag("obstacle") || other.CompareTag("damage"))
+       // {
+       //     PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
+       // }
+        
     }
 }

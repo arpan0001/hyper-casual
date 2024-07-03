@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Add this line
+using UnityEngine.SceneManagement; 
 
 public class bossManager : MonoBehaviour
 {
@@ -69,7 +69,7 @@ public class bossManager : MonoBehaviour
             gameObject.SetActive(false);
             BossIsAlive = false;
             Instantiate(Particle_Death, transform.position, Quaternion.identity);
-            //SceneManager.LoadScene(1); // Add this line to load Scene 1 (Reward System)
+            //SceneManager.LoadScene(1); 
         }
     }
 

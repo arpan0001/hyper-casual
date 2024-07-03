@@ -11,7 +11,7 @@ public class CloneWeaponActive : MonoBehaviour
     public GameObject w3;
     private PlayerManager manager;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         character_animator = GetComponent<Animator>();
