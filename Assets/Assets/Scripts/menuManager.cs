@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.UI;
 
 public class menuManager : MonoBehaviour
 {
-    [SerializeField] private Text TapToPlay; 
+    [SerializeField] private TextMeshProUGUI TapToPlay; 
     [SerializeField] private GameObject Hand_Ico;
+    [SerializeField] private GameObject Level;
     [SerializeField] private GameObject Tap_line;
     [SerializeField] private GameObject DailyRewardButton;
     [SerializeField] private RectTransform tap_handRectTransform;
@@ -50,6 +52,7 @@ public class menuManager : MonoBehaviour
         Tap_line.SetActive(false);
         DailyRewardButton.SetActive(false);
         shop.SetActive(false);
+        Level.SetActive(false);
 
         PlayerManager.PlayerManagerInstance.StartGame();
 
