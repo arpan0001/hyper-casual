@@ -9,11 +9,13 @@ public class PlayerManager : MonoBehaviour
     private int numberOfStickmans, numberOfEnemyStickmans;
     [SerializeField] private TextMeshPro CounterTxt;
     [SerializeField] private GameObject stickMan;
+    [SerializeField] public GameObject weapon1;
     [SerializeField] public GameObject weapon2;
     [SerializeField] public GameObject weapon3;
 
     public bool w2Activated = false;
     public bool w3Activated = false;
+    public bool w1Activated = false;
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
@@ -228,6 +230,21 @@ public class PlayerManager : MonoBehaviour
 
             StartCoroutine(UpdateTheEnemyAndPlayerStickMansNumbers());
         }
+        
+       
+       if (other.CompareTag("nogate"))
+     {
+        
+        if (weapon1 != null)
+        {
+            weapon1.SetActive(true);
+            w1Activated=true;
+            w3Activated=false;
+            w2Activated=false;
+            
+            
+        }
+     }
 
         if (other.CompareTag("weapongate"))
         {

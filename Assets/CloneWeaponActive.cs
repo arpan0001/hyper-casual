@@ -46,12 +46,23 @@ public class CloneWeaponActive : MonoBehaviour
             character_animator.SetBool("run", true);
         }
 
+        if (manager != null && manager.w1Activated)
+        {
+            character_animator.SetBool("run", true);
+             character_animator.SetBool("GunRun", false);
+            Debug.Log("Weapon 1 Activated");
+            w1.SetActive(true);
+            w2.SetActive(false);
+            w3.SetActive(false);
+        }
+
         if (manager != null && manager.w2Activated)
         {
             character_animator.SetBool("run", true);
             Debug.Log("Weapon 2 Activated");
             w2.SetActive(true);
             w1.SetActive(false);
+            w3.SetActive(false);
         }
 
         if (manager != null && manager.w3Activated)
