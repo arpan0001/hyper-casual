@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     public GameObject Explosion;
     public float destroyTime = 10f;
+    private bool isFiring = true;
 
     void Start()
     {
@@ -17,11 +18,32 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        GameObject go = Instantiate(Explosion, transform.position, transform.rotation);
-        go.SetActive(true);
-        Destroy(go, destroyTime);
-        Destroy(this.gameObject);
+        if (isFiring)
+        {
+            GameObject go = Instantiate(Explosion, transform.position, transform.rotation);
+            go.SetActive(true);
+            Destroy(go, destroyTime);
 
-        // col.GetComponent<Script>().doDamage();
+            if (col.CompareTag("red"))
+            {
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                StopFiring();
+            }
+
+            Destroy(this.gameObject);
+
+            // col.GetComponent<Script>().doDamage();
+        }
+    }
+
+    void StopFiring()
+    {
+        isFiring = false;
+        // Add any additional logic to stop the bullet from firing, such as disabling its Rigidbody or removing it from any firing lists.
+        MyRb.velocity = Vector3.zero; // Stop the bullet's movement
+        MyRb.isKinematic = true; // Make the Rigidbody kinematic to stop further physics interactions
     }
 }

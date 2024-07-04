@@ -1,4 +1,3 @@
-
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,9 +13,12 @@ public class EnemyManager : MonoBehaviour
     public Transform enemy;
     public bool Attack;
 
+    // Reference to the Shoot script
+    public Shoot shootScript;
+
     void Start()
     {
-        for (int i = 0; i < Random.Range(30,30 ); i++)
+        for (int i = 0; i < Random.Range(30, 30); i++)
         {
             Instantiate(stickMan, transform.position, new Quaternion(0f, 180f, 0f, 1f), transform);
         }
@@ -45,8 +47,7 @@ public class EnemyManager : MonoBehaviour
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation, quaternion.LookRotation(enemyDirection, Vector3.up),
-                    Time.deltaTime * 3f);
+                transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation, quaternion.LookRotation(enemyDirection, Vector3.up), Time.deltaTime * 3f);
 
                 if (enemy.childCount > 1)
                 {
@@ -54,11 +55,16 @@ public class EnemyManager : MonoBehaviour
 
                     if (distance.magnitude < 1.5f)
                     {
-                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position,
-                            enemy.GetChild(1).position, Time.deltaTime * 2f);
+                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position, enemy.GetChild(1).position, Time.deltaTime * 2f);
                     }
                 }
             }
+        }
+
+        // Check the number of objects with the tag "red" and stop shooting if there are none
+        if (CountRedObjects() == 0)
+        {
+            shootScript.StopShooting();
         }
     }
 
@@ -82,5 +88,11 @@ public class EnemyManager : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<Animator>().SetBool("run", false);
         }
+    }
+
+    // Method to count the number of objects with the tag "red"
+    private int CountRedObjects()
+    {
+        return GameObject.FindGameObjectsWithTag("red").Length;
     }
 }
