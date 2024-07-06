@@ -1103,8 +1103,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 501859732}
-  - {fileID: 2126693803}
   - {fileID: 1408531829}
+  - {fileID: 2126693803}
   - {fileID: 1820007778}
   - {fileID: 2031812724}
   - {fileID: 1005656180}
@@ -2041,15 +2041,19 @@ MonoBehaviour:
   - Image: {fileID: 21300000, guid: 2c7af5b44e0430349836ab8a534bcc5e, type: 3}
     Price: 120
     IsPurchased: 0
+    Prefab: {fileID: 2162864316536855407, guid: 4abb4c05bce796a45a1cc1e708bf3fcd, type: 3}
   - Image: {fileID: 21300000, guid: 35f9e14e56aefac40828fbf92c6cf8e9, type: 3}
     Price: 123
     IsPurchased: 0
+    Prefab: {fileID: 223755489680139683, guid: 725d66130eaaa6549bfc12eaae25569a, type: 3}
   - Image: {fileID: 21300000, guid: 507233abc314a824b9edf7f5c3b61469, type: 3}
     Price: 235
     IsPurchased: 0
+    Prefab: {fileID: 919132149155446097, guid: 13fd81ef3d2a74348888b638453cf13e, type: 3}
   - Image: {fileID: 21300000, guid: 08375cc19655b284681831743e91c46f, type: 3}
     Price: 342
     IsPurchased: 0
+    Prefab: {fileID: 0}
   NoCoinsAnim: {fileID: 409941149}
   ItemTemplate: {fileID: 1719543558687600, guid: 73515c7fff1fcbb48b80f91e295ca208, type: 3}
   ShopScrollView: {fileID: 1520451577}
@@ -2673,7 +2677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4.300001}
+  m_AnchoredPosition: {x: 0, y: -4.300003}
   m_SizeDelta: {x: 0, y: -8.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028202290

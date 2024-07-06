@@ -12,10 +12,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public GameObject weapon1;
     [SerializeField] public GameObject weapon2;
     [SerializeField] public GameObject weapon3;
+    [SerializeField] public GameObject weapon4;
 
     public bool w2Activated = false;
     public bool w3Activated = false;
     public bool w1Activated = false;
+    public bool w4Activated = false;
 
     [Range(0f, 1f)] [SerializeField] private float DistanceFactor, Radius;
 
@@ -241,6 +243,21 @@ public class PlayerManager : MonoBehaviour
             w1Activated=true;
             w3Activated=false;
             w2Activated=false;
+            
+            
+        }
+     }
+
+       if (other.CompareTag("bombgate"))
+     {
+        
+        if (weapon1 != null)
+        {
+            weapon4.SetActive(true);
+            w4Activated=true;
+            w3Activated=false;
+            w2Activated=false;
+            w1Activated=false;
             
             
         }

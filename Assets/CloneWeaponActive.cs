@@ -8,6 +8,7 @@ public class CloneWeaponActive : MonoBehaviour
     public GameObject w1;
     public GameObject w2;
     public GameObject w3;
+    public GameObject w4;
     private PlayerManager manager;
     private Shoot shootScript;  // Reference to the Shoot script
 
@@ -49,9 +50,22 @@ public class CloneWeaponActive : MonoBehaviour
         if (manager != null && manager.w1Activated)
         {
             character_animator.SetBool("run", true);
-             character_animator.SetBool("GunRun", false);
+            character_animator.SetBool("GunRun", false);
+            character_animator.SetBool("BombRun", false);
             Debug.Log("Weapon 1 Activated");
             w1.SetActive(true);
+            w2.SetActive(false);
+            w3.SetActive(false);
+            w4.SetActive(false);
+        }
+
+        if (manager != null && manager.w4Activated)
+        {
+            character_animator.SetBool("run", false);
+            character_animator.SetBool("BombRun", true);
+            Debug.Log("Weapon 4 Activated");
+            w4.SetActive(true);
+            w1.SetActive(false);
             w2.SetActive(false);
             w3.SetActive(false);
         }
@@ -63,16 +77,19 @@ public class CloneWeaponActive : MonoBehaviour
             w2.SetActive(true);
             w1.SetActive(false);
             w3.SetActive(false);
+            w4.SetActive(false);
         }
 
         if (manager != null && manager.w3Activated)
         {
             character_animator.SetBool("run", false);
             character_animator.SetBool("GunRun", true);
+            character_animator.SetBool("BombRun", false);
             Debug.Log("Weapon 3 Activated");
             w3.SetActive(true);
             w1.SetActive(false);
             w2.SetActive(false);
+            w4.SetActive(false);
 
             // Enable shooting
             if (shootScript != null)

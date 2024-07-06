@@ -6,6 +6,7 @@ using DG.Tweening;
 public class stickManManager : MonoBehaviour
 {
     [SerializeField] private ParticleSystem ch_blood;
+    [SerializeField] private ParticleSystem Explosion;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +15,14 @@ public class stickManManager : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
 
-            Instantiate(ch_blood, transform.position, Quaternion.identity);
+            if (PlayerManager.PlayerManagerInstance.w4Activated)
+            {
+                Instantiate(Explosion, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(ch_blood, transform.position, Quaternion.identity);
+            }
         }
 
         switch (other.tag)
@@ -34,15 +42,22 @@ public class stickManManager : MonoBehaviour
             case "obstacle":
             case "damage":
                 Destroy(gameObject);
-                Instantiate(ch_blood, transform.position, Quaternion.identity);
+                
+                if (PlayerManager.PlayerManagerInstance.w4Activated)
+                {
+                    Instantiate(Explosion, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(ch_blood, transform.position, Quaternion.identity);
+                }
                 break;
         }
 
-        
-       // if (other.CompareTag("obstacle") || other.CompareTag("damage"))
-       // {
-       //     PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
-       // }
+        // if (other.CompareTag("obstacle") || other.CompareTag("damage"))
+        // {
+        //     PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
+        // }
         
     }
 }

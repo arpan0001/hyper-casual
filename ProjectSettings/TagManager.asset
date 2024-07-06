@@ -19,6 +19,9 @@ TagManager:
   - gun
   - bullet
   - nogate
+  - bombgate
+  - FxTemporaire
+  - bomb
   layers:
   - Default
   - TransparentFX
