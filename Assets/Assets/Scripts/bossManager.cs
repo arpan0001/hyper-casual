@@ -69,7 +69,7 @@ public class bossManager : MonoBehaviour
             gameObject.SetActive(false);
             BossIsAlive = false;
             Instantiate(Particle_Death, transform.position, Quaternion.identity);
-            //SceneManager.LoadScene(1); 
+            SceneManager.LoadScene(1); 
         }
     }
 

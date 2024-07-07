@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 using System.Collections;
 
-namespace DailyRewardSystem {
-    public enum RewardType {
+namespace DailyRewardSystem
+{
+    public enum RewardType
+    {
         Coins,
     }
 
     [Serializable]
-    public struct Reward {
+    public struct Reward
+    {
         public RewardType Type;
         public int Amount;
     }
 
-    public class DailyRewards : MonoBehaviour {
+    public class DailyRewards : MonoBehaviour
+    {
+        public static DailyRewards Instance;
 
         [Header("Main Menu")]
-        [SerializeField] Text coinsText;
+        [SerializeField] TextMeshProUGUI coinsText;
 
         [Space]
         [Header("Reward UI")]
@@ -51,14 +57,19 @@ namespace DailyRewardSystem {
         private int nextRewardIndex;
         private bool isRewardReady = false;
 
-        void Start() {
+        void Start()
+        {
+            if (Instance == null)
+                Instance = this;
+
             Initialize();
 
             StopAllCoroutines();
             StartCoroutine(CheckForRewards());
         }
 
-        void Initialize() {
+        void Initialize()
+        {
             nextRewardIndex = PlayerPrefs.GetInt("Next_Reward_Index", 0);
 
             UpdateCoinsTextUI();
@@ -72,14 +83,18 @@ namespace DailyRewardSystem {
             claimButton.onClick.RemoveAllListeners();
             claimButton.onClick.AddListener(OnClaimButtonClick);
 
-            if (string.IsNullOrEmpty(PlayerPrefs.GetString("Reward_Claim_Datetime"))) {
+            if (string.IsNullOrEmpty(PlayerPrefs.GetString("Reward_Claim_Datetime")))
+            {
                 PlayerPrefs.SetString("Reward_Claim_Datetime", DateTime.Now.ToString());
             }
         }
 
-        IEnumerator CheckForRewards() {
-            while (true) {
-                if (!isRewardReady) {
+        IEnumerator CheckForRewards()
+        {
+            while (true)
+            {
+                if (!isRewardReady)
+                {
                     DateTime currentDatetime = DateTime.Now;
                     DateTime rewardClaimDatetime = DateTime.Parse(PlayerPrefs.GetString("Reward_Claim_Datetime", currentDatetime.ToString()));
 
@@ -99,7 +114,8 @@ namespace DailyRewardSystem {
             }
         }
 
-        void ActivateReward() {
+        void ActivateReward()
+        {
             isRewardReady = true;
 
             noMoreRewardsPanel.SetActive(false);
@@ -111,19 +127,22 @@ namespace DailyRewardSystem {
             rewardAmountText.text = string.Format("+{0}", reward.Amount);
         }
 
-        void DeactivateReward() {
+        void DeactivateReward()
+        {
             isRewardReady = false;
 
             noMoreRewardsPanel.SetActive(true);
             rewardsNotification.SetActive(false);
         }
 
-        void OnClaimButtonClick() {
+        void OnClaimButtonClick()
+        {
             Reward reward = rewardsDB.GetReward(nextRewardIndex);
 
-            if (reward.Type == RewardType.Coins) {
+            if (reward.Type == RewardType.Coins)
+            {
                 Debug.Log("<color=yellow>" + reward.Type.ToString() + " Claimed : </color>+" + reward.Amount);
-                GameData.Coins += reward.Amount;
+                CoinManager.Instance.AddCoins(reward.Amount); // Update coins in CoinManager
                 fxCoins.Play();
                 UpdateCoinsTextUI();
             }
@@ -140,15 +159,18 @@ namespace DailyRewardSystem {
             DeactivateReward();
         }
 
-        void UpdateCoinsTextUI() {
-            coinsText.text = GameData.Coins.ToString();
+        public void UpdateCoinsTextUI()
+        {
+            coinsText.text = CoinManager.Instance.GetCoins().ToString();
         }
 
-        void OnOpenButtonClick() {
+        void OnOpenButtonClick()
+        {
             rewardsCanvas.SetActive(true);
         }
 
-        void OnCloseButtonClick() {
+        void OnCloseButtonClick()
+        {
             rewardsCanvas.SetActive(false);
         }
     }

@@ -7,6 +7,7 @@ public class rewardSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rewardToShow;
     [SerializeField] private Transform Hand;
     [SerializeField] private Animator handAnim;
+
     void Start()
     {
         handAnim = GetComponent<Animator>();
@@ -17,9 +18,13 @@ public class rewardSystem : MonoBehaviour
         if (other.CompareTag("rewardNo"))
         {
             var multiplier = other.gameObject.name;
+            float rewardAmount = 500 * float.Parse(multiplier);
+            
+            rewardToShow.text = rewardAmount.ToString();
+            PlayerPrefs.SetFloat("reward", rewardAmount);
 
-            rewardToShow.text = (500 * float.Parse(multiplier)).ToString();
-            PlayerPrefs.SetFloat("reward",float.Parse( rewardToShow.text));
+            // Update the CoinManager with the new reward amount
+            CoinManager.Instance.AddCoins((int)rewardAmount);
         }
     }
 

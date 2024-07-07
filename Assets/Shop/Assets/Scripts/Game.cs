@@ -3,46 +3,39 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-	#region SIngleton:Game
+    public static Game Instance;
 
-	public static Game Instance;
+    void Awake ()
+    {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad (gameObject);
+        } else {
+            Destroy (gameObject);
+        }
+    }
 
-	void Awake ()
-	{
-		if (Instance == null) {
-			Instance = this;
-			DontDestroyOnLoad (gameObject);
-		} else {
-			Destroy (gameObject);
-		}
-	}
+    [SerializeField] Text[] allCoinsUIText;
 
-	#endregion
+    void Start ()
+    {
+        UpdateAllCoinsUIText ();
+    }
 
-	[SerializeField] Text[] allCoinsUIText;
+    public void UseCoins (int amount)
+    {
+        CoinManager.Instance.SubtractCoins(amount); // Update coins in CoinManager
+    }
 
-	public int Coins;
+    public bool HasEnoughCoins (int amount)
+    {
+        return (CoinManager.Instance.GetCoins() >= amount); // Check coins in CoinManager
+    }
 
-	void Start ()
-	{
-		UpdateAllCoinsUIText ();
-	}
-
-	public void UseCoins (int amount)
-	{
-		Coins -= amount;
-	}
-
-	public bool HasEnoughCoins (int amount)
-	{
-		return (Coins >= amount);
-	}
-
-	public void UpdateAllCoinsUIText ()
-	{
-		for (int i = 0; i < allCoinsUIText.Length; i++) {
-			allCoinsUIText [i].text = Coins.ToString ();
-		}
-	}
-
+    public void UpdateAllCoinsUIText ()
+    {
+        for (int i = 0; i < allCoinsUIText.Length; i++) {
+            allCoinsUIText [i].text = CoinManager.Instance.GetCoins().ToString(); // Update from CoinManager
+        }
+    }
 }
