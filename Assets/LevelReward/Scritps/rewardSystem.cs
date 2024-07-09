@@ -17,11 +17,15 @@ public class rewardSystem : MonoBehaviour
     {
         if (other.CompareTag("rewardNo"))
         {
-            var multiplier = other.gameObject.name;
-            float rewardAmount = 500 * float.Parse(multiplier);
+            var coinToAdd = other.gameObject.name;
+            float rewardAmount = float.Parse(coinToAdd);
+
+            // Add the reward amount to the current reward
+            float currentReward = PlayerPrefs.GetFloat("reward", 0);
+            float newRewardAmount = currentReward + rewardAmount;
             
-            rewardToShow.text = rewardAmount.ToString();
-            PlayerPrefs.SetFloat("reward", rewardAmount);
+            rewardToShow.text = newRewardAmount.ToString();
+            PlayerPrefs.SetFloat("reward", newRewardAmount);
 
             // Update the CoinManager with the new reward amount
             CoinManager.Instance.AddCoins((int)rewardAmount);

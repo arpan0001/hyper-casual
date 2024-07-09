@@ -7,19 +7,18 @@ using UnityEngine.UI;
 
 public class menuManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI TapToPlay; 
+    [SerializeField] private TextMeshProUGUI TapToPlay;
     [SerializeField] private GameObject Hand_Ico;
     [SerializeField] private GameObject Level;
     [SerializeField] private GameObject Tap_line;
     [SerializeField] private GameObject DailyRewardButton;
     [SerializeField] private RectTransform tap_handRectTransform;
     [SerializeField] private GameObject shop;
-    
 
-    [SerializeField] private float tapToPlaySpeed = 2f;  
-    [SerializeField] private float handIcoSpeed = 1f;    
+    [SerializeField] private float tapToPlaySpeed = 2f;
+    [SerializeField] private float handIcoSpeed = 1f;
 
-    private bool gameStarted = false; 
+    private bool gameStarted = false;
 
     void Start()
     {
@@ -55,6 +54,9 @@ public class menuManager : MonoBehaviour
         Level.SetActive(false);
 
         PlayerManager.PlayerManagerInstance.StartGame();
+
+        // Decrease the music volume
+       
 
         Debug.Log("Game Started!");
     }

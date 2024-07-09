@@ -31,19 +31,24 @@ public class PlayerManager : MonoBehaviour
     private bool attack;
     public static PlayerManager PlayerManagerInstance;
 
-  void Start()
- {
-    player = transform; 
+    
+    [SerializeField] private AudioClip gameStartMusic;
+    private AudioSource audioSource;
 
-    numberOfStickmans = transform.childCount - 2; 
-    CounterTxt.text = numberOfStickmans.ToString(); 
+    void Start()
+    {
+        player = transform;
 
-    camera = Camera.main; 
+        numberOfStickmans = transform.childCount - 2;
+        CounterTxt.text = numberOfStickmans.ToString();
 
-    PlayerManagerInstance = this; 
- }
+        camera = Camera.main;
 
+        PlayerManagerInstance = this;
 
+        
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -106,25 +111,15 @@ public class PlayerManager : MonoBehaviour
         if (gameState)
         {
             road.Translate(road.forward * Time.deltaTime * roadSpeed);
-            
-
-            /*for (int i = 1; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).GetComponent<Animator>() != null)
-                {
-                    transform.GetChild(i).GetComponent<Animator>().SetBool("run", true);
-                }
-            }*/
         }
 
-        if (transform.childCount == 1) 
+        if (transform.childCount == 1)
         {
             if (enemy != null && enemy.transform.GetChild(1).childCount > 0)
             {
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
             }
             gameState = false;
-            
         }
     }
 
@@ -193,7 +188,7 @@ public class PlayerManager : MonoBehaviour
         numberOfStickmans = transform.childCount - 1;
         if (CounterTxt != null)
         {
-            CounterTxt.text = numberOfStickmans.ToString(); 
+            CounterTxt.text = numberOfStickmans.ToString();
         }
 
         FormatStickMan();
@@ -232,65 +227,49 @@ public class PlayerManager : MonoBehaviour
 
             StartCoroutine(UpdateTheEnemyAndPlayerStickMansNumbers());
         }
-        
-       
-       if (other.CompareTag("nogate"))
-     {
-        
-        if (weapon1 != null)
-        {
-            weapon1.SetActive(true);
-            w1Activated=true;
-            w3Activated=false;
-            w2Activated=false;
-            
-            
-        }
-     }
 
-       if (other.CompareTag("bombgate"))
-     {
-        
-        if (weapon1 != null)
+        if (other.CompareTag("nogate"))
         {
-            weapon4.SetActive(true);
-            w4Activated=true;
-            w3Activated=false;
-            w2Activated=false;
-            w1Activated=false;
-            
-            
+            if (weapon1 != null)
+            {
+                weapon1.SetActive(true);
+                w1Activated = true;
+                w3Activated = false;
+                w2Activated = false;
+            }
         }
-     }
+
+        if (other.CompareTag("bombgate"))
+        {
+            if (weapon4 != null)
+            {
+                weapon4.SetActive(true);
+                w4Activated = true;
+                w3Activated = false;
+                w2Activated = false;
+                w1Activated = false;
+            }
+        }
 
         if (other.CompareTag("weapongate"))
         {
-            
             if (weapon2 != null)
             {
                 weapon2.SetActive(true);
-                w2Activated=true;
+                w2Activated = true;
             }
         }
 
         if (other.CompareTag("gun"))
         {
-            
-            if (weapon2 != null)
+            if (weapon3 != null)
             {
                 weapon3.SetActive(true);
-                w2Activated=false;
-
-                w3Activated=true;
-                
+                w2Activated = false;
+                w3Activated = true;
             }
         }
-        
-
-        
     }
-
-
 
     IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
     {
@@ -303,7 +282,7 @@ public class PlayerManager : MonoBehaviour
             numberOfStickmans--;
 
             enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
-            CounterTxt.text = numberOfStickmans.ToString(); 
+            CounterTxt.text = numberOfStickmans.ToString();
 
             if (numberOfStickmans == 0)
             {
@@ -331,12 +310,20 @@ public class PlayerManager : MonoBehaviour
     public void StartGame()
     {
         gameState = true;
+
+        // Play the game start music
+        if (gameStartMusic != null && audioSource != null)
+        {
+            audioSource.clip = gameStartMusic;
+            audioSource.Play();
+        }
     }
 
     public void UpdateStickmanCount()
- {
-    numberOfStickmans = transform.childCount - 1;
-    CounterTxt.text = numberOfStickmans.ToString();
- }
+    {
+        numberOfStickmans = transform.childCount - 1;
+        CounterTxt.text = numberOfStickmans.ToString();
+    }
 
+   
 }

@@ -5,8 +5,17 @@ using DG.Tweening;
 
 public class stickManManager : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem ch_blood;
-    [SerializeField] private ParticleSystem Explosion;
+    [SerializeField] private GameObject ch_blood;
+    [SerializeField] private GameObject Explosion;
+    [SerializeField] private AudioClip hitSound;
+    private AudioSource audioSource;
+    private SoundEffectManager soundEffectManager;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +32,9 @@ public class stickManManager : MonoBehaviour
             {
                 Instantiate(ch_blood, transform.position, Quaternion.identity);
             }
+
+            PlayHitSound();
+            soundEffectManager?.PlayDestroySound();
         }
 
         switch (other.tag)
@@ -32,6 +44,8 @@ public class stickManManager : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     Destroy(gameObject);
+                    PlayHitSound();
+                    soundEffectManager?.PlayDestroySound();
                 }
                 break;
 
@@ -42,7 +56,6 @@ public class stickManManager : MonoBehaviour
             case "obstacle":
             case "damage":
                 Destroy(gameObject);
-                
                 if (PlayerManager.PlayerManagerInstance.w4Activated)
                 {
                     Instantiate(Explosion, transform.position, Quaternion.identity);
@@ -51,13 +64,17 @@ public class stickManManager : MonoBehaviour
                 {
                     Instantiate(ch_blood, transform.position, Quaternion.identity);
                 }
+                PlayHitSound();
+                soundEffectManager?.PlayDestroySound();
                 break;
         }
+    }
 
-        // if (other.CompareTag("obstacle") || other.CompareTag("damage"))
-        // {
-        //     PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
-        // }
-        
+    private void PlayHitSound()
+    {
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
     }
 }

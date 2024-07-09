@@ -12,12 +12,15 @@ public class memeberManager : MonoBehaviour
     public bool fight, member;
     private Rigidbody rb;
     private CapsuleCollider _capsuleCollider;
+    private AudioSource audioSource; // Add this line
+    public AudioClip attackModeAudioClip; // Add this line
 
     void Start()
     {
         character_animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>(); // Add this line
 
         GameObject bossObj = GameObject.FindWithTag("boss");
         if (bossObj != null)
@@ -88,6 +91,7 @@ public class memeberManager : MonoBehaviour
     private void HandleBossDeath()
     {
         character_animator.SetFloat("attackmode", 2f);
+        PlayAttackModeAudio(); // Add this line
     }
 
     public void ChangeTheAttackMode()
@@ -95,25 +99,31 @@ public class memeberManager : MonoBehaviour
         character_animator.SetFloat("attackmode", Random.Range(0, 2));
     }
 
-    private void OnCollisionEnter(Collision other)
- {
-    if (other.collider.CompareTag("damage"))
+    private void PlayAttackModeAudio() // Add this method
     {
-        Health--;
-
-        if (Health <= 0)
+        if (character_animator.GetFloat("attackmode") == 2f && attackModeAudioClip != null)
         {
-            Instantiate(ch_blood, transform.position, Quaternion.identity);
-
-            gameObject.SetActive(false);
-            transform.parent = null;
+            audioSource.PlayOneShot(attackModeAudioClip);
         }
     }
-    else if (other.collider.CompareTag("blue"))
+
+    private void OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
+        if (other.collider.CompareTag("damage"))
+        {
+            Health--;
+
+            if (Health <= 0)
+            {
+                Instantiate(ch_blood, transform.position, Quaternion.identity);
+
+                gameObject.SetActive(false);
+                transform.parent = null;
+            }
+        }
+        else if (other.collider.CompareTag("blue"))
+        {
+            Destroy(other.gameObject);
+        }
     }
- }
-
-
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 77312f6a79ea15442aaffae596f95a53
+guid: dac45042a3b7aaf408d6cf08422d1a44
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: enemyidle
+      name: idle
       takeName: mixamo.com
       internalID: 2073693694548410006
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 119
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,7 +64,7 @@ ModelImporter:
       takeName: Armature.001|Armature.002|mixamo.com|Layer0
       internalID: -814350548788644060
       firstFrame: 0
-      lastFrame: 33
+      lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -93,7 +93,7 @@ ModelImporter:
       takeName: Armature.001|Sad.Idle.001
       internalID: -1865032912706598188
       firstFrame: 0
-      lastFrame: 84
+      lastFrame: 168
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -122,7 +122,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 119
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

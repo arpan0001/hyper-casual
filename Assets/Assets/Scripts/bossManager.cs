@@ -20,6 +20,7 @@ public class bossManager : MonoBehaviour
     public delegate void BossDeathDelegate();
     public static event BossDeathDelegate OnBossDeath;
 
+
     void Start()
     {
         BossManagerCls = this;
@@ -66,10 +67,11 @@ public class bossManager : MonoBehaviour
         if (Health <= 0 && BossIsAlive)
         {
             OnBossDeath?.Invoke();
+            
             gameObject.SetActive(false);
             BossIsAlive = false;
             Instantiate(Particle_Death, transform.position, Quaternion.identity);
-            SceneManager.LoadScene(1); 
+           // SceneManager.LoadScene(1); 
         }
     }
 
