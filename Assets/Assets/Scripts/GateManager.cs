@@ -25,7 +25,7 @@ public class GateManager : MonoBehaviour
             randomNumber = Random.Range(40, 60);
             
             
-            GateNo.text = randomNumber.ToString();
+           GateNo.text = "+" + randomNumber;
         }
     }
 }

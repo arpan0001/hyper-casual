@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -31,7 +32,6 @@ public class PlayerManager : MonoBehaviour
     private bool attack;
     public static PlayerManager PlayerManagerInstance;
 
-    
     [SerializeField] private AudioClip gameStartMusic;
     private AudioSource audioSource;
 
@@ -46,7 +46,6 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManagerInstance = this;
 
-        
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -101,6 +100,7 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
                 gameState = false;
+                LoadTryAgainScene();
             }
         }
         else
@@ -120,6 +120,7 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
             }
             gameState = false;
+            LoadTryAgainScene();
         }
     }
 
@@ -236,6 +237,7 @@ public class PlayerManager : MonoBehaviour
                 w1Activated = true;
                 w3Activated = false;
                 w2Activated = false;
+                w4Activated = false;
             }
         }
 
@@ -267,6 +269,7 @@ public class PlayerManager : MonoBehaviour
                 weapon3.SetActive(true);
                 w2Activated = false;
                 w3Activated = true;
+                w4Activated = false;
             }
         }
     }
@@ -290,6 +293,7 @@ public class PlayerManager : MonoBehaviour
                 gameState = false;
 
                 Destroy(gameObject);
+                LoadTryAgainScene();
                 yield break;
             }
 
@@ -325,5 +329,8 @@ public class PlayerManager : MonoBehaviour
         CounterTxt.text = numberOfStickmans.ToString();
     }
 
-   
+    public void LoadTryAgainScene()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
