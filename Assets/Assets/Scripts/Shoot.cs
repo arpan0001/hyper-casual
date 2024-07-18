@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
     private float timer;
     public GameObject SpawnPos;
     private bool isShooting;
-    public AudioSource shootingAudio; // Reference to the AudioSource component
+    public AudioSource shootingAudio; 
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        // Check the number of objects with the tag "red"
+        
         if (CountRedObjects() == 0)
         {
             StopShooting();
@@ -34,7 +34,7 @@ public class Shoot : MonoBehaviour
                 GameObject go = Instantiate(BulletPrefab, SpawnPos.transform.position, SpawnPos.transform.rotation);
                 go.SetActive(true);
 
-                // Play shooting audio
+                
                 PlayShootingAudio();
             }
         }
@@ -42,7 +42,7 @@ public class Shoot : MonoBehaviour
 
     public void StartShooting()
     {
-        StartCoroutine(StartShootingAfterDelay(0.2f)); // Start shooting after a delay of 0.5 seconds
+        StartCoroutine(StartShootingAfterDelay(0.2f)); 
     }
 
     private IEnumerator StartShootingAfterDelay(float delay)
@@ -56,13 +56,13 @@ public class Shoot : MonoBehaviour
         isShooting = false;
     }
 
-    // Method to count the number of objects with the tag "red"
+    
     private int CountRedObjects()
     {
         return GameObject.FindGameObjectsWithTag("red").Length;
     }
 
-    // Method to play the shooting audio
+
     private void PlayShootingAudio()
     {
         if (shootingAudio != null)

@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Stair
+  - WallRun
+  - Climb
+  - Fly
   - gate
   - enemy
   - blue
@@ -22,6 +26,9 @@ TagManager:
   - bombgate
   - FxTemporaire
   - bomb
+  - Animal
+  - Water
+  - destroyGate
   layers:
   - Default
   - TransparentFX
@@ -43,17 +50,17 @@ TagManager:
   - 
   - 
   - 
+  - Animal
+  - 
+  - 
+  - Enemy
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
   - 
   m_SortingLayers:
   - name: Default

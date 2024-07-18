@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
 {
     public Transform player;
     private int numberOfStickmans, numberOfEnemyStickmans;
-    [SerializeField] private TextMeshPro CounterTxt;
+    [SerializeField] public TextMeshPro CounterTxt;
     [SerializeField] private GameObject stickMan;
     [SerializeField] public GameObject weapon1;
     [SerializeField] public GameObject weapon2;
@@ -39,8 +39,9 @@ public class PlayerManager : MonoBehaviour
     {
         player = transform;
 
-        numberOfStickmans = transform.childCount - 2;
-        CounterTxt.text = numberOfStickmans.ToString();
+        // Calculate initial number of stickmen
+        numberOfStickmans = transform.childCount - 4;
+        UpdateStickmanCount();
 
         camera = Camera.main;
 
@@ -95,7 +96,7 @@ public class PlayerManager : MonoBehaviour
                 enemy.gameObject.SetActive(false);
             }
 
-            if (transform.childCount == 1)
+            if (transform.childCount == 5)
             {
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
@@ -186,12 +187,7 @@ public class PlayerManager : MonoBehaviour
             Instantiate(stickMan, transform.position, Quaternion.identity, transform);
         }
 
-        numberOfStickmans = transform.childCount - 1;
-        if (CounterTxt != null)
-        {
-            CounterTxt.text = numberOfStickmans.ToString();
-        }
-
+        UpdateStickmanCount();
         FormatStickMan();
     }
 
@@ -277,7 +273,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
     {
         numberOfEnemyStickmans = enemy.transform.GetChild(1).childCount - 1;
-        numberOfStickmans = transform.childCount - 1;
+        numberOfStickmans = transform.childCount - 4;
 
         while (numberOfEnemyStickmans > 0 && numberOfStickmans > 0)
         {
@@ -285,7 +281,7 @@ public class PlayerManager : MonoBehaviour
             numberOfStickmans--;
 
             enemy.transform.GetChild(1).GetComponent<EnemyManager>().CounterTxt.text = numberOfEnemyStickmans.ToString();
-            CounterTxt.text = numberOfStickmans.ToString();
+            UpdateStickmanCount();
 
             if (numberOfStickmans == 0)
             {
@@ -315,7 +311,6 @@ public class PlayerManager : MonoBehaviour
     {
         gameState = true;
 
-        // Play the game start music
         if (gameStartMusic != null && audioSource != null)
         {
             audioSource.clip = gameStartMusic;
@@ -323,9 +318,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void UpdateStickmanCount()
+   public void UpdateStickmanCount()
     {
-        numberOfStickmans = transform.childCount - 1;
+        numberOfStickmans = transform.childCount - 4;
         CounterTxt.text = numberOfStickmans.ToString();
     }
 

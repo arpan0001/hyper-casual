@@ -7,6 +7,7 @@ public class SoundEffectManager : MonoBehaviour
     [SerializeField] private AudioClip bombGateSound;
     [SerializeField] private AudioClip weaponGateSound;
     [SerializeField] private AudioClip destroySound;
+    [SerializeField] private AudioClip JumpSound;
     [SerializeField] private float pitch = 1.0f;
 
     private AudioSource audioSource;

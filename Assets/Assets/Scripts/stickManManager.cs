@@ -3,29 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class stickManManager : MonoBehaviour
 {
     [SerializeField] private GameObject ch_blood;
     [SerializeField] private GameObject Explosion;
-    [SerializeField] private AudioClip hitSound;
+    
+    [SerializeField] private TextMeshPro CounterTxt;
     private AudioSource audioSource;
     private SoundEffectManager soundEffectManager;
+    private PlayerManager playerManager;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         soundEffectManager = FindObjectOfType<SoundEffectManager>();
+        playerManager = PlayerManager.PlayerManagerInstance;
+        CounterTxt = playerManager.CounterTxt; 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("red") && other.transform.parent.childCount > 0)
+        switch (other.tag)
+        {
+            case "red":
+                HandleRedCollision(other);
+                break;
+            case "jump":
+                HandleJumpCollision();
+                break;
+            case "obstacle":
+            case "damage":
+                HandleDamageCollision();
+                break;
+            
+        }
+    }
+
+    private void HandleRedCollision(Collider other)
+    {
+        if (other.transform.parent.childCount > 0)
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
 
-            if (PlayerManager.PlayerManagerInstance.w4Activated)
+            if (playerManager.w4Activated)
             {
                 Instantiate(Explosion, transform.position, Quaternion.identity);
             }
@@ -34,113 +57,44 @@ public class stickManManager : MonoBehaviour
                 Instantiate(ch_blood, transform.position, Quaternion.identity);
             }
 
-            PlayHitSound();
+            
             soundEffectManager?.PlayDestroySound();
-        }
-
-        switch (other.tag)
-        {
-            case "red":
-                if (other.transform.parent.childCount > 1)
-                {
-                    Destroy(other.gameObject);
-                    Destroy(gameObject);
-                    PlayHitSound();
-                    soundEffectManager?.PlayDestroySound();
-                }
-                break;
-
-            case "jump":
-                transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
-                break;
-
-            case "obstacle":
-            case "damage":
-                Destroy(gameObject);
-                if (PlayerManager.PlayerManagerInstance.w4Activated)
-                {
-                    Instantiate(Explosion, transform.position, Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(ch_blood, transform.position, Quaternion.identity);
-                }
-               // transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(PlayerManager.PlayerManagerInstance.FormatStickMan);
-                PlayHitSound();
-                soundEffectManager?.PlayDestroySound();
-
-                CheckPlayerStickmanCount();
-                break;
-
-            case "weapongate":
-                ActivateWeapon(other);
-                break;
+            CheckPlayerStickmanCount();
         }
     }
 
-    private void PlayHitSound()
+    private void HandleJumpCollision()
     {
-        if (audioSource != null && hitSound != null)
-        {
-            audioSource.PlayOneShot(hitSound);
-        }
+        transform.DOJump(transform.position, 1f, 1, 1f).SetEase(Ease.Flash).OnComplete(playerManager.FormatStickMan);
     }
+
+    private void HandleDamageCollision()
+    {
+        Destroy(gameObject);
+
+        if (playerManager.w4Activated)
+        {
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(ch_blood, transform.position, Quaternion.identity);
+        }
+
+        soundEffectManager?.PlayDestroySound();
+        CheckPlayerStickmanCount();
+    }
+
+   
 
     public void CheckPlayerStickmanCount()
     {
-        PlayerManager.PlayerManagerInstance.UpdateStickmanCount();
-        if (PlayerManager.PlayerManagerInstance.transform.childCount == 1)
+        int numberOfStickmans = playerManager.transform.childCount - 5;
+        CounterTxt.text = numberOfStickmans.ToString();
+        if (numberOfStickmans == 0)
         {
-            PlayerManager.PlayerManagerInstance.LoadTryAgainScene();
+            playerManager.LoadTryAgainScene();
         }
     }
-
-    private void ActivateWeapon(Collider other)
-    {
-        PlayerManager playerManager = PlayerManager.PlayerManagerInstance;
-
-        if (other.CompareTag("nogate"))
-        {
-            if (playerManager.weapon1 != null)
-            {
-                playerManager.weapon1.SetActive(true);
-                playerManager.w1Activated = true;
-                playerManager.w3Activated = false;
-                playerManager.w2Activated = false;
-                playerManager.w4Activated = false;
-            }
-        }
-
-        if (other.CompareTag("bombgate"))
-        {
-            if (playerManager.weapon4 != null)
-            {
-                playerManager.weapon4.SetActive(true);
-                playerManager.w4Activated = true;
-                playerManager.w3Activated = false;
-                playerManager.w2Activated = false;
-                playerManager.w1Activated = false;
-            }
-        }
-
-        if (other.CompareTag("weapongate"))
-        {
-            if (playerManager.weapon2 != null)
-            {
-                playerManager.weapon2.SetActive(true);
-                playerManager.w2Activated = true;
-            }
-        }
-
-        if (other.CompareTag("gun"))
-        {
-            if (playerManager.weapon3 != null)
-            {
-                playerManager.weapon3.SetActive(true);
-                playerManager.w2Activated = false;
-                playerManager.w3Activated = true;
-                playerManager.w4Activated = false;
-            }
-        }
-    }
+   
 }

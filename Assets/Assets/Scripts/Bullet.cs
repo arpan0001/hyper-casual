@@ -35,15 +35,15 @@ public class Bullet : MonoBehaviour
 
             Destroy(this.gameObject);
 
-            // col.GetComponent<Script>().doDamage();
+            
         }
     }
 
     void StopFiring()
     {
         isFiring = false;
-        // Add any additional logic to stop the bullet from firing, such as disabling its Rigidbody or removing it from any firing lists.
-        MyRb.velocity = Vector3.zero; // Stop the bullet's movement
-        MyRb.isKinematic = true; // Make the Rigidbody kinematic to stop further physics interactions
+        
+        MyRb.velocity = Vector3.zero; 
+        MyRb.isKinematic = true; 
     }
 }
