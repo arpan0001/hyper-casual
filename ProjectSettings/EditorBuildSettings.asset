@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Shop/Assets/shop.unity
     guid: 7062e0862b02e13409ca235598ceda46
   - enabled: 1
-    path: Assets/Game Asset/UI/GUI Mobile Hyper-Casual/Scenes/TryAgain.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Assets 1/Scenes/RewardVideo.unity
+    guid: 1f52252a0246b14469c564956fb3993e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

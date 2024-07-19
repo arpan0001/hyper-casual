@@ -1,33 +1,43 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public Level[] levels;
+    public LevelData levelData; // Reference to the LevelData ScriptableObject
     private int currentLevelIndex = 0;
 
-    void Start()
+    private void Start()
     {
-        LoadNextLevel();
+        LoadLevel(currentLevelIndex); // Load the first level at the start
     }
 
     public void LoadNextLevel()
     {
-        if (currentLevelIndex < levels.Length)
+        if (currentLevelIndex < levelData.levelNames.Length - 1)
         {
-            Instantiate(levels[currentLevelIndex].levelPrefab);
-            Debug.Log("Loaded Level: " + levels[currentLevelIndex].levelName);
+            UnloadLevel(currentLevelIndex);
             currentLevelIndex++;
+            LoadLevel(currentLevelIndex);
         }
         else
         {
-            Debug.Log("No more levels to load.");
+            Debug.Log("All levels completed!");
         }
     }
 
-    // Call this method to reset the levels and start from the beginning
-    public void ResetLevels()
+    private void LoadLevel(int index)
     {
-        currentLevelIndex = 0;
-        LoadNextLevel();
+        if (index >= 0 && index < levelData.levelNames.Length)
+        {
+            SceneManager.LoadScene(levelData.levelNames[index], LoadSceneMode.Additive);
+        }
+    }
+
+    private void UnloadLevel(int index)
+    {
+        if (index >= 0 && index < levelData.levelNames.Length)
+        {
+            SceneManager.UnloadSceneAsync(levelData.levelNames[index]);
+        }
     }
 }

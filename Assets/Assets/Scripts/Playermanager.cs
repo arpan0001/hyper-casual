@@ -326,6 +326,14 @@ public class PlayerManager : MonoBehaviour
 
     public void LoadTryAgainScene()
     {
+        StartCoroutine(WaitForSceneLoad(1f));
+    }
+
+    public IEnumerator WaitForSceneLoad(float t)
+    {
+        yield return new WaitForSeconds(t);
         SceneManager.LoadScene(3);
+
+        
     }
 }
