@@ -2084,19 +2084,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopItemsList:
   - Image: {fileID: 21300000, guid: f57e5a5c9c1d518479011daee505bc20, type: 3}
-    Price: 120
+    Price: 10000
     IsPurchased: 1
     Prefab: {fileID: 2162864316536855407, guid: 4abb4c05bce796a45a1cc1e708bf3fcd, type: 3}
   - Image: {fileID: 21300000, guid: 2c7af5b44e0430349836ab8a534bcc5e, type: 3}
-    Price: 123
+    Price: 10000
     IsPurchased: 0
     Prefab: {fileID: 223755489680139683, guid: 725d66130eaaa6549bfc12eaae25569a, type: 3}
   - Image: {fileID: 21300000, guid: 507233abc314a824b9edf7f5c3b61469, type: 3}
-    Price: 235
+    Price: 15000
     IsPurchased: 0
     Prefab: {fileID: 919132149155446097, guid: 13fd81ef3d2a74348888b638453cf13e, type: 3}
   - Image: {fileID: 21300000, guid: 08375cc19655b284681831743e91c46f, type: 3}
-    Price: 342
+    Price: 10000
     IsPurchased: 0
     Prefab: {fileID: 0}
   NoCoinsAnim: {fileID: 409941149}

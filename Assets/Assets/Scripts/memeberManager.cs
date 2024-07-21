@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class memeberManager : MonoBehaviour
+public class memberManager : MonoBehaviour
 {
     public Animator character_animator;
     public GameObject ch_blood;
@@ -12,21 +12,22 @@ public class memeberManager : MonoBehaviour
     public bool fight, member;
     private Rigidbody rb;
     private CapsuleCollider _capsuleCollider;
-    private AudioSource audioSource; // Add this line
-    public AudioClip attackModeAudioClip; // Add this line
+    private AudioSource audioSource;
+    public AudioClip attackModeAudioClip;
+    
 
     void Start()
     {
         character_animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
-        audioSource = GetComponent<AudioSource>(); // Add this line
+        audioSource = GetComponent<AudioSource>();
 
         GameObject bossObj = GameObject.FindWithTag("boss");
         if (bossObj != null)
         {
             Boss = bossObj.transform;
-            bossManager.OnBossDeath += HandleBossDeath; 
+            bossManager.OnBossDeath += HandleBossDeath;
         }
 
         Health = 50;
@@ -84,28 +85,26 @@ public class memeberManager : MonoBehaviour
     {
         if (Boss != null)
         {
-            bossManager.OnBossDeath -= HandleBossDeath; 
+            bossManager.OnBossDeath -= HandleBossDeath;
         }
     }
 
     private void HandleBossDeath()
     {
         character_animator.SetFloat("attackmode", 2f);
-        PlayAttackModeAudio(); // Add this line
+        PlayAttackModeAudio();
     }
 
-    public void ChangeTheAttackMode()
-    {
-        character_animator.SetFloat("attackmode", Random.Range(0, 2));
-    }
-
-    private void PlayAttackModeAudio() // Add this method
+    private void PlayAttackModeAudio()
     {
         if (character_animator.GetFloat("attackmode") == 2f && attackModeAudioClip != null)
         {
             audioSource.PlayOneShot(attackModeAudioClip);
+            
         }
     }
+
+    
 
     private void OnCollisionEnter(Collision other)
     {

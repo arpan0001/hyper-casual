@@ -326,7 +326,6 @@ public class PlayerManager : MonoBehaviour
 
     public void LoadTryAgainScene()
     {
-        StartCoroutine(WaitForSceneLoad(1f));
     }
 
     public IEnumerator WaitForSceneLoad(float t)
