@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +12,13 @@ public class stickManManager : MonoBehaviour
     [SerializeField] private GameObject Explosion;
     
     [SerializeField] private TextMeshPro CounterTxt;
-    private AudioSource audioSource;
+    
     private SoundEffectManager soundEffectManager;
     private PlayerManager playerManager;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        
         soundEffectManager = FindObjectOfType<SoundEffectManager>();
         playerManager = PlayerManager.PlayerManagerInstance;
         CounterTxt = playerManager.CounterTxt; 
@@ -91,10 +92,7 @@ public class stickManManager : MonoBehaviour
     {
         int numberOfStickmans = playerManager.transform.childCount - 5;
         CounterTxt.text = numberOfStickmans.ToString();
-        if (numberOfStickmans == 0)
-        {
-            playerManager.LoadTryAgainScene();
-        }
+        
     }
    
 }

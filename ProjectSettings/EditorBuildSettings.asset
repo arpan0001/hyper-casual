@@ -17,8 +17,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Assets 1/Scenes/scene.unity
     guid: 1f52252a0246b14469c564956fb3993e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Assets 2/Scenes/scene.unity
     guid: b86f781cd85d920498fba2757f1864cd
+  - enabled: 0
+    path: Assets/IronSource/DemoScene/IronSourceDemo.unity
+    guid: ccc0ac08126704384bdda74c26d99797
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

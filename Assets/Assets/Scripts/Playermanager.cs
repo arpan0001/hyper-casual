@@ -101,7 +101,7 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
                 gameObject.SetActive(false);
                 gameState = false;
-                LoadTryAgainScene();
+                
             }
         }
         else
@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
                 enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttacking();
             }
             gameState = false;
-            LoadTryAgainScene();
+            
         }
     }
 
@@ -289,7 +289,7 @@ public class PlayerManager : MonoBehaviour
                 gameState = false;
 
                 Destroy(gameObject);
-                LoadTryAgainScene();
+                
                 yield break;
             }
 
@@ -324,15 +324,5 @@ public class PlayerManager : MonoBehaviour
         CounterTxt.text = numberOfStickmans.ToString();
     }
 
-    public void LoadTryAgainScene()
-    {
-    }
-
-    public IEnumerator WaitForSceneLoad(float t)
-    {
-        yield return new WaitForSeconds(t);
-        SceneManager.LoadScene(3);
-
-        
-    }
+    
 }

@@ -111,7 +111,7 @@ public class RewardBox : MonoBehaviour {
 		StartCoroutine ( SimulateEditorRequestRewardAd ( ) );
 
 		#elif UNITY_ANDROID
-		admob.RequestRewardAd();
+		//admob.RequestRewardAd();
 
 		#endif
 	}
