@@ -5999,6 +5999,7 @@ GameObject:
   - component: {fileID: 800952660617676053}
   - component: {fileID: 5744369845554629739}
   - component: {fileID: 7040435294775114327}
+  - component: {fileID: 1652301594184417680}
   - component: {fileID: 115052236651353211}
   - component: {fileID: 5100780782573440318}
   m_Layer: 7
@@ -6151,6 +6152,21 @@ MonoBehaviour:
   FireRate: 0.5
   SpawnPos: {fileID: 7674108333352199635}
   shootingAudio: {fileID: 0}
+--- !u!114 &1652301594184417680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901445199059313000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3390b0168625341892ac46d6a24cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ch_blood: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
+  Explosion: {fileID: 7226888052703040409, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
+  CounterTxt: {fileID: 0}
 --- !u!114 &115052236651353211
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,10 +49,9 @@ public class RewardBox : MonoBehaviour {
 	[SerializeField] ParticleSystem coinsRewardFx;
 	[SerializeField] ParticleSystem gemssRewardFx;
 
-	/*[Space]
+	[Space]
 	[Header ( "Admob reference" )]
-	[SerializeField] Admob_v2 admob;*/
-
+	
 	[Space]
 	[Header ( "Time to wait (Minutes) before activating Rewards again" )]
 	public double waitTimeToActivateRewards;
