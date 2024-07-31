@@ -6017,7 +6017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4901445199059313000}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.11, y: -0.9198391, z: -0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6165,7 +6165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch_blood: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
-  Explosion: {fileID: 7226888052703040409, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
+  Explosion: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
   CounterTxt: {fileID: 0}
 --- !u!114 &115052236651353211
 MonoBehaviour:
@@ -6180,7 +6180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch_blood: {fileID: 783733554174284111, guid: f2de7ef69caa7ba4388047778134e621, type: 3}
-  Explosion: {fileID: 7226888052703040409, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
+  Explosion: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
   CounterTxt: {fileID: 0}
 --- !u!82 &5100780782573440318
 AudioSource:
@@ -6202,7 +6202,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 1.61
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0

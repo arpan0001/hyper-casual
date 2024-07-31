@@ -31,7 +31,7 @@ namespace DailyRewardSystem
         [SerializeField] Button openButton;
         [SerializeField] Button closeButton;
         [SerializeField] Image rewardImage;
-        [SerializeField] Text rewardAmountText;
+        [SerializeField] TextMeshProUGUI rewardAmountText;
         [SerializeField] Button claimButton;
         [SerializeField] GameObject rewardsNotification;
         [SerializeField] GameObject noMoreRewardsPanel;

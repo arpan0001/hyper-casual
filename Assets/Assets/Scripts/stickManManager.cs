@@ -90,7 +90,7 @@ public class stickManManager : MonoBehaviour
 
     public void CheckPlayerStickmanCount()
     {
-        int numberOfStickmans = playerManager.transform.childCount - 5;
+        int numberOfStickmans = playerManager.transform.childCount - 6;
         CounterTxt.text = numberOfStickmans.ToString();
         
     }

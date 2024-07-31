@@ -39,8 +39,8 @@ public class PlayerManager : MonoBehaviour
     {
         player = transform;
 
-        // Calculate initial number of stickmen
-        numberOfStickmans = transform.childCount - 4;
+        
+        numberOfStickmans = transform.childCount - 5;
         UpdateStickmanCount();
 
         camera = Camera.main;
@@ -273,7 +273,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator UpdateTheEnemyAndPlayerStickMansNumbers()
     {
         numberOfEnemyStickmans = enemy.transform.GetChild(1).childCount - 1;
-        numberOfStickmans = transform.childCount - 4;
+        numberOfStickmans = transform.childCount - 5;
 
         while (numberOfEnemyStickmans > 0 && numberOfStickmans > 0)
         {
@@ -320,7 +320,7 @@ public class PlayerManager : MonoBehaviour
 
    public void UpdateStickmanCount()
     {
-        numberOfStickmans = transform.childCount - 4;
+        numberOfStickmans = transform.childCount - 5;
         CounterTxt.text = numberOfStickmans.ToString();
     }
 

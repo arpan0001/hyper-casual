@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro;
 using DailyRewardSystem;
+using TMPro;
 
 public class CoinManager : MonoBehaviour
 {
@@ -33,20 +33,7 @@ public class CoinManager : MonoBehaviour
         UpdateCoinsText();
 
         // Notify other scripts about the coin update
-        if (DailyRewards.Instance != null)
-        {
-            DailyRewards.Instance.UpdateCoinsTextUI();
-        }
-
-        if (CoinReward.CoinRewardInstance != null)
-        {
-            CoinReward.CoinRewardInstance.UpdateCoinCounter();
-        }
-
-        if (Game.Instance != null)
-        {
-            Game.Instance.UpdateAllCoinsUIText();
-        }
+        UpdateOtherScripts();
     }
 
     public void SubtractCoins(int amount)
@@ -56,20 +43,7 @@ public class CoinManager : MonoBehaviour
         UpdateCoinsText();
 
         // Notify other scripts about the coin update
-        if (DailyRewards.Instance != null)
-        {
-            DailyRewards.Instance.UpdateCoinsTextUI();
-        }
-
-        if (CoinReward.CoinRewardInstance != null)
-        {
-            CoinReward.CoinRewardInstance.UpdateCoinCounter();
-        }
-
-        if (Game.Instance != null)
-        {
-            Game.Instance.UpdateAllCoinsUIText();
-        }
+        UpdateOtherScripts();
     }
 
     public int GetCoins()
@@ -82,6 +56,25 @@ public class CoinManager : MonoBehaviour
         if (coinsText != null)
         {
             coinsText.text = coins.ToString();
+        }
+    }
+
+    private void UpdateOtherScripts()
+    {
+        // Update any other scripts or UI elements that depend on the coin count
+        if (DailyRewards.Instance != null)
+        {
+            DailyRewards.Instance.UpdateCoinsTextUI();
+        }
+
+        if (CoinReward.CoinRewardInstance != null)
+        {
+            CoinReward.CoinRewardInstance.UpdateCoinCounter();
+        }
+
+        if (Game.Instance != null)
+        {
+            Game.Instance.UpdateAllCoinsUIText();
         }
     }
 }

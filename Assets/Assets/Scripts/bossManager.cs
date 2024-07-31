@@ -35,43 +35,51 @@ public class bossManager : MonoBehaviour
     {
         HealthBar.transform.rotation = Quaternion.Euler(HealthBar.transform.rotation.x, 0f, HealthBar.transform.rotation.y);
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (var player in players)
+        if (BossIsAlive)
         {
-            var playerDistance = Vector3.Distance(player.transform.position, transform.position);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-            if (playerDistance < maxDistance && !LockOnTarget)
+            foreach (var player in players)
             {
-                target = player.transform;
-                BossAnimator.SetBool("fight", true);
+                var playerDistance = Vector3.Distance(player.transform.position, transform.position);
 
-                transform.position = Vector3.MoveTowards(transform.position, target.position, 1f * Time.deltaTime);
+                if (playerDistance < maxDistance && !LockOnTarget)
+                {
+                    target = player.transform;
+                    BossAnimator.SetBool("fight", true);
+
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, 1f * Time.deltaTime);
+                }
+
+                if (playerDistance < minDistance)
+                    LockOnTarget = true;
             }
 
-            if (playerDistance < minDistance)
-                LockOnTarget = true;
-        }
+            if (LockOnTarget && target != null)
+            {
+                var bossRotation = new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(bossRotation, Vector3.up), 10f * Time.deltaTime);
+            }
 
-        if (LockOnTarget && target != null)
-        {
-            var bossRotation = new Vector3(target.position.x, transform.position.y, target.position.z) - transform.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(bossRotation, Vector3.up), 10f * Time.deltaTime);
-        }
+            if (players.Length == 0)
+            {
+                BossAnimator.SetBool("fight", false);
+                BossAnimator.SetFloat("attackmode", 4f);
+            }
 
-        if (players.Length == 0)
-        {
-            BossAnimator.SetBool("fight", false);
-            BossAnimator.SetFloat("attackmode", 4f);
+            if (Health <= 0 && !DeathAnimationTriggered)
+            {
+                TriggerBossDeath();
+            }
         }
+    }
 
-        if (Health <= 0 && BossIsAlive && !DeathAnimationTriggered)
-        {
-            OnBossDeath?.Invoke();
-            DeathAnimationTriggered = true;
-            BossAnimator.SetTrigger("Death"); // Trigger the death animation
-            StartCoroutine(HandleBossDeath());
-        }
+    private void TriggerBossDeath()
+    {
+        OnBossDeath?.Invoke();
+        DeathAnimationTriggered = true;
+        BossAnimator.SetTrigger("Death"); // Trigger the death animation
+        StartCoroutine(HandleBossDeath());
     }
 
     private IEnumerator HandleBossDeath()
